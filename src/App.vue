@@ -1,29 +1,48 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-  </div>
+	<div id="app">
+		<router-view></router-view>
+		<tabs v-model="selectIndex">
+			<tab v-for="(tab,index) in tabList" :key="index" :name="tab.tabName"></tab>
+		</tabs>
+	</div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+<script>
+export default {
+	data() {
+		return {
+			selectIndex: 0,
+			tabList: [
+				{tabName: '电影', path: '/movie'},
+				{tabName: '影院', path: '/cinema'},
+				{tabName: '我的', path: '/mine'}]
+		}
+	},
+	watch: {
+		// 监听selectIndex的变化
+		selectIndex: {
+			handler(newValue) {
+				// 展示不同的页面，改变路由
+				this.$router.push(this.tabList[newValue].path);
+			}
+		}
+	}
 }
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+</script>
+
+
+<style lang="scss">
+html,body,#app {
+    width: 100%;
+    height: 100%;
+}
+body {
+    font-size: 0.4rem;
+}
+.page{
+	width: 100%;
+	position: absolute;
+	top: 0;
+	bottom: .98rem;
 }
 </style>
