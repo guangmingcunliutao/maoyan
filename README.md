@@ -35,3 +35,9 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 使用父子组件传值，非父子组件传值，以及v-model模式传值，父子级元素组件可以互相访问
 
  -->
+
+ <!-- 
+ 
+ axios请求的封装和使用，对获取到的数据进行处理过滤，模块的提取
+ 
+  -->

@@ -1,6 +1,9 @@
 <template>
 	<div id="app">
-		<router-view></router-view>
+		<!-- 保留组件状态 -->
+		<keep-alive>
+			<router-view></router-view>
+		</keep-alive>
 		<tabs v-model="selectIndex">
 			<tab v-for="(tab,index) in tabList" :key="index" :name="tab.tabName"></tab>
 		</tabs>
