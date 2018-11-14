@@ -27,10 +27,10 @@ export function getPlayingList(){
                 // console.log(data);
                 let newData = data.movieList.map((item)=>{
                     // 遍历数据，对数据进行解构处理
-                    let {id, nm, img, version, sc, star, showInfo, wish, globalReleased} = item;
+                    let {id, nm, img, version, sc, star, showInfo, wish, globalReleased, showst} = item;
                     // 特殊数据，特殊处理
                     img = img.replace(/w.h/,'112.180');
-                    return {id, nm, img, version, sc, star, showInfo, wish, globalReleased};
+                    return {id, nm, img, version, sc, star, showInfo, wish, globalReleased, showst};
                 });
                 // 成功回调，传入参数，经过处理的数据和所有的id
                 resolve({data: newData, movieIds: data.movieIds});
@@ -59,10 +59,10 @@ export function getMoreDataList(ids) {
             }else {
                 let newData = data.coming.map((item)=>{
                     // 遍历数据，对数据进行解构处理
-                    let {id, nm, img, version, sc, star, showInfo, wish, globalReleased} = item;
+                    let {id, nm, img, version, sc, star, showInfo, wish, globalReleased, showst} = item;
                     // 特殊数据，特殊处理
                     img = img.replace(/w.h/,'112.180');
-                    return {id, nm, img, version, sc, star, showInfo, wish, globalReleased};
+                    return {id, nm, img, version, sc, star, showInfo, wish, globalReleased, showst};
                 });
                 resolve(newData);
             }
@@ -91,12 +91,16 @@ export function getComingList () {
                 // 请求失败
                 return ;
             }else {
-                console.log(data);
+                // console.log(data);
                 // 对数据进行处理
                 let newData = data.coming.map((item)=>{
-                    let {id, nm, img, wish, star, showInfo, version, comingTitle, globalReleased, sc} = item;
+                    // 判断，如果有showInfo直接赋值，没有就把rt的赋值个showinfo
+                    if(!item.showInfo){
+                        item.showInfo = item.rt;
+                    }
+                    let {id, nm, img, wish, star, showInfo, version, comingTitle, globalReleased, sc, showst} = item;
                     img = img.replace(/w.h/,'112.180');
-                    return {id, nm, img, wish, star, showInfo, version, comingTitle, globalReleased, sc};
+                    return {id, nm, img, wish, star, showInfo, version, comingTitle, globalReleased, sc, showst};
                 });
 
                 // 让数据按照其中的日期字段分类

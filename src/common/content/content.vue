@@ -9,6 +9,10 @@
 <script>
 export default {
     name: 'app-content',
+    props: {
+        // 接受传递进来的参数
+        canLoadMore: Boolean
+    },
     methods: {
         // 提供刷新滚动视图的方法，在外部引入组件的时候，只要在数据渲染完之后刷新滚动视图即可
         refresh(){
@@ -28,9 +32,10 @@ export default {
             this.contentScroll.refresh();
         }); */
         this.contentScroll.on('scrollEnd', ()=>{
-            // 判断到达底部刷新刷新
-            if(this.contentScroll.y <= this.contentScroll.maxScrollY){
-                // console.log('请求刷新');
+            
+            // 判断到达了底部，并且可以允许刷新再执行
+            if((this.contentScroll.y <= this.contentScroll.maxScrollY) && this.canLoadMore){
+                console.log('请求刷新');
                 // 触发父组件的方法
                 this.$emit('loadmore');
             }

@@ -33,9 +33,9 @@
                 </div>
                 <div class="content-right">
                     <div class="btn">
-                        <span class="true" v-if="movieInfo.globalReleased">购票</span>
-                        <span class="false" v-else-if="!movieInfo.globalReleased">预售</span>
-                        <span class="false" v-else-if="movieInfo.showst == 1">想看</span>
+                        <span class="buy" v-if="movieInfo.showst == 3">购票</span>
+                        <span class="pre" v-else-if="movieInfo.showst == 4">预售</span>
+                        <span class="miss" v-else-if="movieInfo.showst == 1">想看</span>
                     </div>
                 </div>
             </div>
@@ -132,11 +132,14 @@ export default {
                 color: white;
                 border-radius: .1rem;
             }
-            .true{
+            .buy{
                 background: red;
             }
-            .false{
+            .pre{
                 background: #3c9fe6;
+            }
+            .miss{
+                background: orange;
             }
         }
     }
