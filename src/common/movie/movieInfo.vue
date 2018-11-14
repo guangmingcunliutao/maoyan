@@ -28,13 +28,14 @@
                             <span>人想看</span>
                         </div>
                         <div class="star line-ellipsis">主演：{{movieInfo.star}}</div>
-                        <div class="showInfo line-ellipsis">{{movieInfo.showInfo}}</div>
+                        <div class="showInfo line-ellipsis" v-if="movieInfo.showInfo">{{movieInfo.showInfo}}</div>
                     </div>
                 </div>
                 <div class="content-right">
                     <div class="btn">
                         <span class="true" v-if="movieInfo.globalReleased">购票</span>
                         <span class="false" v-else-if="!movieInfo.globalReleased">预售</span>
+                        <span class="false" v-else-if="movieInfo.showst == 1">想看</span>
                     </div>
                 </div>
             </div>
@@ -50,7 +51,7 @@ export default {
         movieInfo: Object
     },
     created() {
-        // console.log(this.movieInfo);
+        // console.log(this.movieInfo);/*  */
     },
     methods: {
         // 将要实现的点击事件

@@ -16,6 +16,15 @@ const PLAYING_API = '/ajax/movieOnInfoList';
 
 /* 
 
+请求更多正在热映的数据
+参数：
+token：
+movieIds：
+*/
+const MORE_PLAYING_API = '/ajax/moreComingList';
+
+/* 
+
 即将上映的接口
 参数：
 ci：城市id
@@ -30,5 +39,6 @@ export default {
     PRO_HOST,
     SAT_HOST,
     PLAYING_API,
-    COMING_API
+    COMING_API,
+    MORE_PLAYING_API
 }

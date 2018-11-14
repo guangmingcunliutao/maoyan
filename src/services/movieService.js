@@ -32,11 +32,43 @@ export function getPlayingList(){
                     img = img.replace(/w.h/,'112.180');
                     return {id, nm, img, version, sc, star, showInfo, wish, globalReleased};
                 });
-                resolve(newData);
+                // 成功回调，传入参数，经过处理的数据和所有的id
+                resolve({data: newData, movieIds: data.movieIds});
             }
         }).catch(()=>{
             // 请求失败，进行处理
             reject();
+        });
+    });
+}
+
+// 正在上映页面下拉刷新
+export function getMoreDataList(ids) {
+    return new Promise((resolve, reject)=>{
+        http({
+            url: API.MORE_PLAYING_API,
+            method: 'GET',
+            data: {
+                token: '',
+                movieIds: ids
+            }
+        }).then(({data, status})=>{
+            if(status != 200){
+                // 请求失败
+                return;
+            }else {
+                let newData = data.coming.map((item)=>{
+                    // 遍历数据，对数据进行解构处理
+                    let {id, nm, img, version, sc, star, showInfo, wish, globalReleased} = item;
+                    // 特殊数据，特殊处理
+                    img = img.replace(/w.h/,'112.180');
+                    return {id, nm, img, version, sc, star, showInfo, wish, globalReleased};
+                });
+                resolve(newData);
+            }
+        }).catch((error)=>{
+            // 请求失败
+            console.log(error);
         });
     });
 }
@@ -59,12 +91,12 @@ export function getComingList () {
                 // 请求失败
                 return ;
             }else {
-                // console.log(data);
+                console.log(data);
                 // 对数据进行处理
                 let newData = data.coming.map((item)=>{
-                    let {id, nm, img, wish, star, showInfo, version, comingTitle} = item;
+                    let {id, nm, img, wish, star, showInfo, version, comingTitle, globalReleased, sc} = item;
                     img = img.replace(/w.h/,'112.180');
-                    return {id, nm, img, wish, star, showInfo, version, comingTitle};
+                    return {id, nm, img, wish, star, showInfo, version, comingTitle, globalReleased, sc};
                 });
 
                 // 让数据按照其中的日期字段分类
