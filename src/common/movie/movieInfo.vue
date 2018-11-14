@@ -1,6 +1,6 @@
 <template>
     <div class="movieInfo">
-        <li :key="movieInfo.id" class="item" @click="seeDetail">
+        <li class="item" @click="seeDetail">
             <div class="item-img">
                 <img :src="movieInfo.img" alt="">
             </div>

@@ -1,5 +1,5 @@
 <template>
-    <app-content :style="{top: '1.88rem'}">
+    <app-content ref="content" :style="{top: '1.88rem'}">
         <div class="coming">
             <div>
                 <!-- 循环对象,list：属性值，key：属性 -->
@@ -7,7 +7,7 @@
                     <h3>{{key}}</h3>
                     <ul>
                         <!-- <li class="comingTtile" v-for="item in list">{{item.nm}}</li> -->
-                        <movie-info v-for="item in list" :movieInfo="item"></movie-info>
+                        <movie-info v-for="item in list" :movieInfo="item" :key="item.id"></movie-info>
                     </ul>
                 </div>
             </div>
@@ -28,6 +28,12 @@ export default {
             // console.log('请求成功');
             this.comingList = data;
             // console.log(this.comingList);
+
+            // 成功请求到数据，数据发生变化，高度随之改变，需要刷新滚动视图
+            // this.$nextTick：在数据重新渲染之后再执行，得到的是数据渲染完成，更新之后的dom
+            this.$nextTick(()=>{
+                this.$refs.content.refresh();
+            });
         });
     }
 }
