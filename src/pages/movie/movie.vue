@@ -83,6 +83,7 @@ export default {
     .nav {
         flex: 1;
         height: .88rem;
+        color: #666;
         ul{
             display: flex;
             justify-content: space-around;

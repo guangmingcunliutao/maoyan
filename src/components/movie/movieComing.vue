@@ -6,7 +6,8 @@
                 <div v-for="(list, key) in comingList" :key="list.id">
                     <h3>{{key}}</h3>
                     <ul>
-                        <li class="comingTtile" v-for="item in list">{{item.nm}}</li>
+                        <!-- <li class="comingTtile" v-for="item in list">{{item.nm}}</li> -->
+                        <movie-info v-for="item in list" :movieInfo="item"></movie-info>
                     </ul>
                 </div>
             </div>

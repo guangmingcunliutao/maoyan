@@ -29,7 +29,7 @@ export function getPlayingList(){
                     // 遍历数据，对数据进行解构处理
                     let {id, nm, img, version, sc, star, showInfo, wish, globalReleased} = item;
                     // 特殊数据，特殊处理
-                    img = img.replace(/w.h/,'64.90');
+                    img = img.replace(/w.h/,'112.180');
                     return {id, nm, img, version, sc, star, showInfo, wish, globalReleased};
                 });
                 resolve(newData);
@@ -63,6 +63,7 @@ export function getComingList () {
                 // 对数据进行处理
                 let newData = data.coming.map((item)=>{
                     let {id, nm, img, wish, star, showInfo, version, comingTitle} = item;
+                    img = img.replace(/w.h/,'112.180');
                     return {id, nm, img, wish, star, showInfo, version, comingTitle};
                 });
 

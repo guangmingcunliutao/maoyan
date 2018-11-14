@@ -2,12 +2,8 @@
     <app-content :style="{top: '1.88rem'}">
         <div class="palying">
             <ul>
-                <li v-for="item in palyingList" :key="item.id" class="item" @click="seeDetail">
-                    <div class="item-img">
-                        <img :src="item.img" alt="">
-                    </div>
-                    <div class="item-content"></div>
-                </li>
+                <!-- 抽取每一个电影的详细信息，成为一个组件，传入组件需要的数据对象 -->
+                <movie-info v-for="palyingMovie in palyingList" :movieInfo="palyingMovie"></movie-info>
             </ul>
         </div>
     </app-content>
@@ -22,9 +18,7 @@ export default {
         }
     },
     methods: {
-        seeDetail(){
-            console.log(1);
-        }
+        
     },
     created() {
         // 在这个钩子函数里面请求数据
@@ -32,32 +26,13 @@ export default {
             // console.log('请求成功');
             // 赋值数据
             this.palyingList = data;
+            console.log(this.palyingList);
         });
     }
 }
 </script>
 
 <style lang="scss" scoped>
-.item {
-    width: 100%;
-    height: 2.28rem;
-    padding: 0 .2rem;
-    box-sizing: border-box;
-    display: flex;
-    .item-img{
-        width: 1.12rem;
-        height: 1.8rem;
-        padding: .24rem 0;
-        img{
-            width: 100%;
-            height: 100%;
-        }
-    }
-    .item-content{
-        flex: 1;
-        margin-left: .2rem;
-        border-bottom: 1px solid #ccc;
-    }
-}
+
 </style>
 
