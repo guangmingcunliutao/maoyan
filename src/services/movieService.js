@@ -74,13 +74,13 @@ export function getMoreDataList(ids) {
 }
 
 // 请求即将上映的数据
-export function getComingList () {
+export function getComingList (ci) {
     return new Promise ((resolve, reject)=>{
         http({
             url: API.COMING_API,
             method: 'GET',
             data: {
-                ci: 30,
+                ci: ci,
                 token: '',
                 limit: 10
             }
@@ -135,7 +135,7 @@ export function getCityList(){
                 return ;
             }else {
                 // 请求成功，处理数据
-                console.log(data);
+                // console.log(data);
                 // 定义一个新对象
                 let newData = {}
                 data.cts.map(item=>{
@@ -151,6 +151,27 @@ export function getCityList(){
             }
         }).catch((error)=>{
             // 请求失败
+            console.log(error);
+        });
+    });
+}
+
+// 请求本期最受欢迎数据
+export function mostExpected(ci,offset) {
+    return new Promise((resolve, reject) => {
+        http({
+            url: API.MOST_EXPECTED_API,
+            method: 'GET',
+            data: {
+                ci: ci,
+                offset: offset,
+                limit: 10,
+                token: ''
+            }
+        }).then((data)=> {
+            console.log(data);
+            resolve(data);
+        }).catch((error)=> {
             console.log(error);
         });
     });

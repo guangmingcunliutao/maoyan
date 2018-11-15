@@ -16,15 +16,22 @@
 </template>
 
 <script>
-import {getComingList} from '../../services/movieService'
+import {getComingList, mostExpected} from '../../services/movieService'
+import {mapState} from 'vuex'
 export default {
     data() {
         return {
             comingList: []
         }
     },
+    computed: {
+        ...mapState({
+            ci: 'ci'
+        })
+    },
     created(){
-        getComingList().then((data)=>{
+        // 初始化获取即将上映电影的数据
+        getComingList(this.ci).then((data)=>{
             // console.log('请求成功');
             this.comingList = data;
             // console.log(this.comingList);
@@ -34,6 +41,9 @@ export default {
             this.$nextTick(()=>{
                 this.$refs.content.refresh();
             });
+        });
+        mostExpected(this.ci).then((data)=> {
+            console.log('请求到了数据');
         });
     }
 }

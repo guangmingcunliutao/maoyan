@@ -18,19 +18,22 @@ export default {
 
 <style lang="scss" scoped>
 .city {
-    width: 1.12rem;
+    width: 1.8rem;
     height: .4rem;
     box-sizing: border-box;
     padding-left: .2rem;
-    .city-name::after{
-        content: '';
-        display: inline-block;
-        width: 0;
-        height: 0;
-        border: .12rem solid transparent;
-        border-top: .12rem solid #666;
-        transform: translateY(3px);
+    .city-name{
+        &::after{
+            content: '';
+            display: inline-block;
+            width: 0;
+            height: 0;
+            border: .12rem solid transparent;
+            border-top: .12rem solid #666;
+            transform: translateY(3px);
+        }
     }
+    
 }
 </style>
 

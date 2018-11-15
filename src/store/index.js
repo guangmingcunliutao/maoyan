@@ -7,7 +7,8 @@ Vue.use(Vuex)
 let store = new Vuex.Store({
 	// state：存放全局数据
 	state: {
-		city: '深圳'
+		city: '深圳',
+		ci: 30
 	},
 	// getter：存放全局计算属性
 	getters: {
@@ -17,9 +18,10 @@ let store = new Vuex.Store({
 	mutations: {
 		// state：文件内部的state
 		// params：传入的参数
-		setCity(state, params) {
+		setCityCi(state, params) {
 			// console.log(state, params);
-			state.city = params;
+			state.city = params.cityName;
+			state.ci = params.ci;
 		}
 	},
 	// actions：事件处理，外部通过调用$store对象，来访问actions里面的事件，actions事件通过访问commit触发mutations的方法来更新state的数据
@@ -27,7 +29,8 @@ let store = new Vuex.Store({
 		// context：代表上下文
 		// params：传入的参数
 		cityAction(context, params) {
-			context.commit('setCity', params);
+			// console.log(params);
+			context.commit('setCityCi', params);
 		}
 	}
 });

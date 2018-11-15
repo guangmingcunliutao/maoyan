@@ -32,6 +32,17 @@ const CITY_LIST_API = '/dianying/cities.json'
 
 /* 
 
+本期最受期待接口
+http://m.maoyan.com/ajax/mostExpected?ci=50&limit=10&offset=0&token=
+
+*/
+
+
+const MOST_EXPECTED_API = '/ajax/mostExpected'
+
+
+/* 
+
 即将上映的接口
 参数：
 ci：城市id
@@ -48,5 +59,6 @@ export default {
     PLAYING_API,
     COMING_API,
     CITY_LIST_API,
+    MOST_EXPECTED_API,
     MORE_PLAYING_API
 }

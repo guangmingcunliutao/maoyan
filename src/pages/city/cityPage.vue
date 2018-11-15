@@ -4,7 +4,7 @@
             <li v-for="(city,key) in cityList" :key="key">
                 <div class="city-title">{{key.toLocaleUpperCase()}}</div>
                 <ul class="city-list">
-                    <li v-for="(item, index) in city" :ci="item.id" :key="index" @click="back(item.nm)">{{item.nm}}</li>
+                    <li v-for="(item, index) in city" :ci="item.id" :key="index" @click="back(item.nm, item.id)">{{item.nm}}</li>
                 </ul>
             </li>
         </ul>
@@ -20,10 +20,13 @@ export default {
         }
     },
     methods: {
-        back(cityName){
+        back(cityName, ci){
             this.$router.back();
             // console.log(cityName);
-            this.$store.dispatch('cityAction', cityName);
+            this.$store.dispatch('cityAction', {
+                cityName: cityName,
+                ci: ci
+            });
         }
     },
     created() {
