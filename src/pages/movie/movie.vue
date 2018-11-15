@@ -2,9 +2,7 @@
     <div id="movie" class="page">
         <app-head title="猫眼电影"></app-head>
         <div class="sub-head">
-            <div class="city">
-                <span class="city-name">深圳</span>
-            </div>
+            <city></city>
             <div class="nav">
                 <ul>
                     <li v-for="(navItem, index) in navList" :key="index" :class="{active: index==navIndex}" @click="selectLi(index)">
@@ -41,7 +39,7 @@ export default {
     },
     data() {
         return {
-            navList:['正在热映', '即将上映'],
+            navList: ['正在热映', '即将上映'],
             navIndex: 0
         }
     },
@@ -49,6 +47,9 @@ export default {
         selectLi(index){
             this.navIndex = index;
         }
+    },
+    created(){
+        // console.log(this.$store.state.city);
     }
 }
 </script>
@@ -65,21 +66,6 @@ export default {
     align-items: center;
     font-size: .30rem;
     box-sizing: border-box;
-    .city {
-        width: 1.12rem;
-        height: .4rem;
-        box-sizing: border-box;
-        padding-left: .2rem;
-        .city-name::after{
-            content: '';
-            display: inline-block;
-            width: 0;
-            height: 0;
-            border: .12rem solid transparent;
-            border-top: .12rem solid #666;
-            transform: translateY(3px);
-        }
-    }
     .nav {
         flex: 1;
         height: .88rem;

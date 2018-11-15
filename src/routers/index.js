@@ -7,6 +7,7 @@ Vue.use(Router)
 import movie from '../pages/movie/movie'
 import cinema from '../pages/cinema/cinema'
 import mine from '../pages/mine/mine'
+import cityPage from '../pages/city/cityPage'
 
 export default new Router({
     mode: 'history',
@@ -23,6 +24,10 @@ export default new Router({
         {
             path: '/mine',
             component: mine
+        },
+        {
+            path: '/cityPage',
+            component: cityPage
         },
         // 重定向，一开重定向到默认显示的页面
         {

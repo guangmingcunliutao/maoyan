@@ -18,7 +18,8 @@ export default {
             playingList: [],
             playingMovieIds: [],
             // 判断是否能够加载更多
-            canLoadMore: true
+            canLoadMore: true,
+            citydata: {}
         }
     },
     methods: {

@@ -25,6 +25,13 @@ const MORE_PLAYING_API = '/ajax/moreComingList';
 
 /* 
 
+所有的城市接口
+
+*/
+const CITY_LIST_API = '/dianying/cities.json'
+
+/* 
+
 即将上映的接口
 参数：
 ci：城市id
@@ -40,5 +47,6 @@ export default {
     SAT_HOST,
     PLAYING_API,
     COMING_API,
+    CITY_LIST_API,
     MORE_PLAYING_API
 }

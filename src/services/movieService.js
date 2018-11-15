@@ -108,7 +108,7 @@ export function getComingList () {
                 newData.map((item)=>{
                     // 判断对象是否有这个属性，如果没有，就添加，有就向里面添加元素
                     if(!handedData[item.comingTitle]){
-                        handedData[item.comingTitle] = []
+                        handedData[item.comingTitle] = [];
                     }
                     handedData[item.comingTitle].push(item);
                 });
@@ -118,6 +118,40 @@ export function getComingList () {
             }
         }).catch(()=>{
             console.log('请求失败');
+        });
+    });
+}
+
+
+// 请求所有的城市数据
+export function getCityList(){
+    return new Promise((resolve, reject)=>{
+        http({
+            url: API.CITY_LIST_API,
+            method: 'GET'
+        }).then(({data, status})=>{
+            if(status != 200){
+                // 请求失败
+                return ;
+            }else {
+                // 请求成功，处理数据
+                console.log(data);
+                // 定义一个新对象
+                let newData = {}
+                data.cts.map(item=>{
+                    // 如果对象中不存在这个首字母的属性，那就增加一个，如果有了，直接往这个数组属性里面添加数据
+                    if(!newData[item.py.slice(0, 1)]){
+                        newData[item.py.slice(0, 1)] = [];
+                    }
+                    newData[item.py.slice(0, 1)].push(item);
+                });
+
+                // 数据处理完成
+                resolve(newData);
+            }
+        }).catch((error)=>{
+            // 请求失败
+            console.log(error);
         });
     });
 }
