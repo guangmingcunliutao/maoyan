@@ -18,6 +18,9 @@ export default {
         refresh(){
             // console.log('刷新');
             this.contentScroll.refresh();
+        },
+        scrollTo(height){
+            this.contentScroll.scrollTo(0, height*(-1), 200);
         }
     },
     mounted() {
@@ -56,4 +59,3 @@ export default {
     top: 0;
 }
 </style>
-

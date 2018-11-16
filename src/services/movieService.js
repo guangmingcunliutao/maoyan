@@ -137,17 +137,44 @@ export function getCityList(){
                 // 请求成功，处理数据
                 // console.log(data);
                 // 定义一个新对象
-                let newData = {}
+                let cityMap = {}
                 data.cts.map(item=>{
                     // 如果对象中不存在这个首字母的属性，那就增加一个，如果有了，直接往这个数组属性里面添加数据
-                    if(!newData[item.py.slice(0, 1)]){
-                        newData[item.py.slice(0, 1)] = [];
+                    if(!cityMap[item.py.slice(0, 1)]){
+                        cityMap[item.py.slice(0, 1)] = [];
                     }
-                    newData[item.py.slice(0, 1)].push(item);
+                    cityMap[item.py.slice(0, 1)].push(item);
                 });
 
+                // 提取首字母
+                // 抽取对象中的所有key值，保存到数组当中
+                // let letter = Object.keys(cityMap);
+                let letter = []
+                for(var item in cityMap){
+                    letter.push(item);
+                }
+                // 对首字母进行排序
+                for(var i = 0; i < letter.length; i++){
+                    for(var j = i + 1; j<letter.length; j++){
+                        if(letter[i] > letter[j]){
+                            var tmp = letter[i];
+                            letter[i] = letter[j];
+                            letter[j] = tmp;
+                        }
+                    }
+                }
+                // console.log(letter);
+
+                // 返回一个数组，数组里面的每一个元素都是一个对象
+                let newData = letter.map(item=>{
+                    return {
+                        key: item,
+                        value: cityMap[item]
+                    }
+                });
+                // console.log(newData);
                 // 数据处理完成
-                resolve(newData);
+                resolve({key: letter, data : newData});
             }
         }).catch((error)=>{
             // 请求失败
@@ -169,7 +196,7 @@ export function mostExpected(ci,offset) {
                 token: ''
             }
         }).then((data)=> {
-            console.log(data);
+            // console.log(data);
             resolve(data);
         }).catch((error)=> {
             console.log(error);
