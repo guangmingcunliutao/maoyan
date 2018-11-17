@@ -151,6 +151,13 @@ export function getCityList(){
                 for(var item in cityMap){
                     letter.push(item);
                 }
+
+                /* letter.sort((a, b)=>{
+                    // console.log(a.charCodeAt(0), b.charCodeAt(0));
+                    return a.charCodeAt(0) - b.charCodeAt(0);
+                }); */
+                // console.log(letter);
+
                 // 对首字母进行排序
                 for(var i = 0; i < letter.length; i++){
                     for(var j = i + 1; j<letter.length; j++){
