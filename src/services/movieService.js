@@ -112,8 +112,6 @@ export function getComingList (ci) {
                     }
                     handedData[item.comingTitle].push(item);
                 });
-
-                
                 resolve(handedData);
             }
         }).catch(()=>{
@@ -195,9 +193,24 @@ export function mostExpected(ci,offset) {
                 limit: 10,
                 token: ''
             }
-        }).then((data)=> {
-            // console.log(data);
-            resolve(data);
+        }).then(({data, status})=> {
+
+            if(status != 200){
+                // 请求失败
+                return;
+            }
+            // 处理数据
+            let newData = data.coming.map((item)=>{
+                let {comingTitle, id, img, nm, wish, wishst} = item;
+                // 更改img
+                img = img.replace('w.h', '170.230');
+                return {comingTitle, id, img, nm, wish, wishst};
+            });
+            // console.log(newData);
+        
+            
+            resolve(newData);
+            
         }).catch((error)=> {
             console.log(error);
         });

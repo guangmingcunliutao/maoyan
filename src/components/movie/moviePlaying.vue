@@ -64,7 +64,7 @@ export default {
             // 赋值数据
             this.playingList = data;
             this.playingMovieIds = movieIds;
-            // console.log(this.palyingList);
+            // console.log(this.playingList);
 
             // 成功请求到数据，数据发生变化，高度随之改变，需要刷新滚动视图
             // this.$nextTick：在数据重新渲染之后再执行，得到的是数据渲染完成，更新之后的dom

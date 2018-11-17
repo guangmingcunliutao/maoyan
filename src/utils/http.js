@@ -27,6 +27,6 @@ export default function http(options){
         // baseURL：将自动拼接到url前面，便于为axios实例的方法传递相对的url
         baseURL: API.SAT_HOST,
         // 请求超时时间
-        timeout: 1000
+        timeout: 5000
     });
 }

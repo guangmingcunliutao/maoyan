@@ -1,14 +1,18 @@
 <template>
     <div class="page" id="cityPage">
         <app-content ref="content" style="top: 0">
-                <ul >
-                    <li v-for="item in cityList" :key="item.key" ref="list">
-                        <div class="city-title">{{item.key.toUpperCase()}}</div>
-                        <ul class="city-list">
-                            <li v-for="city in item.value" :ci="city.id" :key="city.id" @click="back(city.nm, city.id)">{{city.nm}}</li>
-                        </ul>
-                    </li>
-                </ul>
+            <div>定位城市</div>
+            <div class="city-list">
+                <div>正在定位</div>
+            </div>
+            <ul >
+                <li v-for="item in cityList" :key="item.key" ref="list">
+                    <div class="city-title">{{item.key.toUpperCase()}}</div>
+                    <ul class="city-list">
+                        <li v-for="city in item.value" :ci="city.id" :key="city.id" @click="back(city.nm, city.id)">{{city.nm}}</li>
+                    </ul>
+                </li>
+            </ul>
         </app-content>
         <div class="letter">
             <ul>

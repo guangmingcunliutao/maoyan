@@ -27,7 +27,7 @@
                             <span class="num">{{movieInfo.wish}}</span>
                             <span>人想看</span>
                         </div>
-                        <div class="star line-ellipsis">主演：{{movieInfo.star}}</div>
+                        <div class="star line-ellipsis" v-if="movieInfo.star">主演：{{movieInfo.star}}</div>
                         <div class="showInfo line-ellipsis" v-if="movieInfo.showInfo">{{movieInfo.showInfo}}</div>
                     </div>
                 </div>
@@ -51,7 +51,7 @@ export default {
         movieInfo: Object
     },
     created() {
-        // console.log(this.movieInfo);/*  */
+        // console.log(this.movieInfo);
     },
     methods: {
         // 将要实现的点击事件
@@ -95,7 +95,7 @@ export default {
                 display: flex;
                 align-items: center;
                 h3{
-                    width: 2.08rem;
+                    max-width: 2.08rem;
                     height: .48rem;
                     white-space: nowrap;
                     text-overflow: ellipsis;
