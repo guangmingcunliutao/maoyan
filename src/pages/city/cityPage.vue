@@ -3,7 +3,7 @@
         <app-content ref="content" style="top: 0">
             <div>定位城市</div>
             <div class="city-list">
-                <div>正在定位</div>
+                <div>{{loc}}</div>
             </div>
             <ul >
                 <li v-for="item in cityList" :key="item.key" ref="list">
@@ -30,7 +30,8 @@ export default {
     data() {
         return {
             cityList: [],
-            key: []
+            key: [],
+            loc: '正在定位'
         }
     },
     methods: {
@@ -66,6 +67,9 @@ export default {
                 this.$refs.content.refresh();
             });
         });
+        setTimeout(()=>{
+            this.loc = '定位失败，请刷新';
+        },5000);
     }
 }
 </script>

@@ -30,6 +30,8 @@ let store = new Vuex.Store({
 		// params：传入的参数
 		cityAction(context, params) {
 			// console.log(params);
+			document.cookie = `ci=${params.ci},${params.cityName};expires=7` ;
+			// console.log(params);
 			context.commit('setCityCi', params);
 		}
 	}

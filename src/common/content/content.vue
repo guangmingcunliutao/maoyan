@@ -31,16 +31,17 @@ export default {
             mouseWheel: true
         });
         // 点击界面刷新滚动视图，也可以利用nextTick方法，在数据渲染完成之后再刷新滚动视图
-        /* this.contentScroll.on('beforeScrollStart', ()=>{
+        this.contentScroll.on('beforeScrollStart', ()=>{
             this.contentScroll.refresh();
-        }); */
+        });
         this.contentScroll.on('scrollEnd', ()=>{
             
             // 判断到达了底部，并且可以允许刷新再执行
             if((this.contentScroll.y <= this.contentScroll.maxScrollY) && this.canLoadMore){
-                console.log('请求刷新');
+                // console.log('请求刷新');
                 // 触发父组件的方法
                 this.$emit('loadmore');
+                this.$emit('loadcomingmore');
             }
         });
     }

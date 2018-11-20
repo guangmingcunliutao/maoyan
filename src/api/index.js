@@ -50,7 +50,34 @@ token：可选，用户标识
 limit：数据长度
 
 */
-const COMING_API = '/ajax/comingList';
+const COMING_API = '/ajax/comingList'
+
+/* 
+
+更多即将上映接口
+参数
+ci：城市id
+token：用户标识
+limit：数据长度
+movieIds：
+
+*/
+const MORE_COMING_API = '/ajax/moreComingList'
+
+
+
+
+/* 
+
+请求影院列表接口
+参数：
+day：当天日期
+offset：
+limit：长度
+cityId：城市id
+
+*/
+const CINEMA_API = '/ajax/cinemaList'
 
 // 向外输出
 export default {
@@ -59,6 +86,8 @@ export default {
     PLAYING_API,
     COMING_API,
     CITY_LIST_API,
+    CINEMA_API,
     MOST_EXPECTED_API,
+    MORE_COMING_API,
     MORE_PLAYING_API
 }

@@ -11,6 +11,7 @@
 
 <script>
 import {getPlayingList, getMoreDataList} from '../../services/movieService'
+import { mapState } from 'vuex';
 
 export default {
     data() {
@@ -22,7 +23,36 @@ export default {
             citydata: {}
         }
     },
+    computed: {
+        ...mapState({
+            ci: 'ci'
+        })
+    },
+    watch: {
+        ci(){
+            this.initData();
+        }
+    },
     methods: {
+        initData() {
+                // 在这个钩子函数里面请求数据
+            getPlayingList().then(({data, movieIds})=>{
+                // console.log('请求成功');
+                // 赋值数据
+                this.playingList = data;
+                this.playingMovieIds = movieIds;
+                // console.log(this.playingList);
+
+                // 成功请求到数据，数据发生变化，高度随之改变，需要刷新滚动视图
+                // this.$nextTick：在数据重新渲染之后再执行，得到的是数据渲染完成，更新之后的dom
+                this.$nextTick(()=>{
+                    this.$refs.content.refresh();
+                });
+            }).catch((error)=>{
+                console.log('请求失败' + error);
+                this.initData();
+            });
+        },
         // 自定义方法，子组件触发
         getMoreData(){
             // 请求下一页的数据
@@ -58,20 +88,7 @@ export default {
         }
     },
     created() {
-        // 在这个钩子函数里面请求数据
-        getPlayingList().then(({data, movieIds})=>{
-            // console.log('请求成功');
-            // 赋值数据
-            this.playingList = data;
-            this.playingMovieIds = movieIds;
-            // console.log(this.playingList);
-
-            // 成功请求到数据，数据发生变化，高度随之改变，需要刷新滚动视图
-            // this.$nextTick：在数据重新渲染之后再执行，得到的是数据渲染完成，更新之后的dom
-            this.$nextTick(()=>{
-                this.$refs.content.refresh();
-            });
-        });
+        this.initData();
     }
 }
 </script>

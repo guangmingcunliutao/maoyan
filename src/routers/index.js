@@ -5,7 +5,7 @@ Vue.use(Router)
 
 // 引入主要页面
 import movie from '../pages/movie/movie'
-import cinema from '../pages/cinema/cinema'
+// import cinema from '../pages/cinema/cinema'
 import mine from '../pages/mine/mine'
 import cityPage from '../pages/city/cityPage'
 
@@ -19,7 +19,9 @@ export default new Router({
         },
         {
             path: '/cinema',
-            component: cinema
+            // component: cinema,
+            // 组件懒加载
+            component: ()=>import ('../pages/cinema/cinema')
         },
         {
             path: '/mine',

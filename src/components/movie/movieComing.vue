@@ -1,5 +1,5 @@
 <template>
-    <app-content ref="content" :style="{top: '1.88rem'}">
+    <app-content ref="content" :style="{top: '1.88rem'}" :canLoadMore="canLoadMore" @loadcomingmore="getMoreData">
 
         <div class="most-expected">
             <div>
@@ -39,14 +39,16 @@
 </template>
 
 <script>
-import {getComingList, mostExpected} from '../../services/movieService'
+import {getComingList, mostExpected, getMoreComingData} from '../../services/movieService'
 import {mapState} from 'vuex'
 export default {
     data() {
         return {
             comingList: {},
+            comingMovieIds: [],
             mostExpected: [],
-            wrapwidth: 0
+            wrapwidth: 0,
+            canLoadMore: true
         }
     },
     computed: {
@@ -61,8 +63,10 @@ export default {
     },
     methods: {
         initData() {
+            
                 // 初始化获取即将上映电影的数据
-            getComingList(this.ci).then((data)=>{
+            getComingList(this.ci).then(({data, movieIds})=>{
+                this.comingMovieIds = movieIds;
                 // console.log('请求成功');
                 this.comingList = data;
                 // console.log(this.comingList);
@@ -72,10 +76,35 @@ export default {
                 this.$nextTick(()=>{
                     this.$refs.content.refresh();
                 });
+            }).catch((error)=>{
+                console.log('请求失败' + error);
             });
+
+
             // 获取最受欢迎数据
             mostExpected(this.ci).then((data)=> {
                 this.mostExpected = data;
+            });
+        },
+        getMoreData(){
+            let ids = [...this.comingMovieIds];
+            let length = 0;
+            for(var j in this.comingList){
+                length += this.comingList[j].length;
+            }
+            ids = ids.splice(length, 10);
+            let movieIds = ids.join(',');
+            this.canLoadMore = false;
+            getMoreComingData(this.ci, movieIds, this.comingList).then((data)=>{
+                // console.log(data);
+                this.comingList = {...data};
+                if(length >= this.comingMovieIds.length){
+                    this.canLoadMore = false;
+                }else{
+                    this.canLoadMore = true;
+                }
+            }).catch((error)=>{
+                console.log('错误'+error);
             });
         }
     },
@@ -94,9 +123,9 @@ export default {
             });
             console.log(width);
             this.wrapwidth = width + 'px';
-            this.$nextTick(()=>{
+            // this.$nextTick(()=>{
                 this.expectedSroll.refresh();
-            });
+            // });
         });
     }
 }
@@ -105,6 +134,11 @@ export default {
 <style lang="scss" scoped>
 .coming{
     border-top: .2rem solid #f5f5f5;
+    h3{
+        font-size: .28rem;
+        color: #333;
+        padding: .24rem .3rem 0;
+    }
 }
 .most-expected{
     padding: .24rem .3rem;

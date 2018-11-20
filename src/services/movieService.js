@@ -69,6 +69,7 @@ export function getMoreDataList(ids) {
         }).catch((error)=>{
             // 请求失败
             console.log(error);
+            reject();
         });
     });
 }
@@ -104,7 +105,7 @@ export function getComingList (ci) {
                 });
 
                 // 让数据按照其中的日期字段分类
-                let handedData = {}
+                let handedData = {};
                 newData.map((item)=>{
                     // 判断对象是否有这个属性，如果没有，就添加，有就向里面添加元素
                     if(!handedData[item.comingTitle]){
@@ -112,14 +113,91 @@ export function getComingList (ci) {
                     }
                     handedData[item.comingTitle].push(item);
                 });
-                resolve(handedData);
+                resolve({data: handedData, movieIds: data.movieIds});
             }
-        }).catch(()=>{
+        }).catch((error)=>{
             console.log('请求失败');
+            reject(error);
         });
     });
 }
 
+// 请求更多即将上映数据
+export function getMoreComingData(ci, ids, comingList){
+    return new Promise((resolve, reject)=>{
+        http({
+            url: API.MORE_COMING_API,
+            method: 'GET',
+            data: {
+                ci: ci,
+                limit: 10,
+                token: '',
+                movieIds: ids
+            }
+        }).then(({data, status})=>{
+            // console.log(data);
+            if(status !=200){
+                return ;
+            }
+            let newData = data.coming.map((item)=>{
+                if(!item.showInfo){
+                    item.showInfo = item.rt;
+                }
+                let {id, nm, img, wish, star, showInfo, version, comingTitle, globalReleased, sc, showst} = item;
+                img = img.replace('w.h', '112.180');
+                return {id, nm, img, wish, star, showInfo, version, comingTitle, globalReleased, sc, showst};
+            });
+            // 让数据按照其中的日期字段分类
+            newData.map((item)=>{
+                // 判断对象是否有这个属性，如果没有，就添加，有就向里面添加元素
+                if(!comingList[item.comingTitle]){
+                    comingList[item.comingTitle] = [];
+                }
+                comingList[item.comingTitle].push(item);
+            });
+            resolve(comingList);
+        }).catch((error)=>{
+            // console.log(error);
+            reject(error);
+        });
+    });
+}
+
+// 请求本期最受欢迎数据
+export function mostExpected(ci,offset) {
+    return new Promise((resolve, reject) => {
+        http({
+            url: API.MOST_EXPECTED_API,
+            method: 'GET',
+            data: {
+                ci: ci,
+                offset: offset,
+                limit: 10,
+                token: ''
+            }
+        }).then(({data, status})=> {
+
+            if(status != 200){
+                // 请求失败
+                return;
+            }
+            // 处理数据
+            let newData = data.coming.map((item)=>{
+                let {comingTitle, id, img, nm, wish, wishst} = item;
+                // 更改img
+                img = img.replace('w.h', '170.230');
+                return {comingTitle, id, img, nm, wish, wishst};
+            });
+            // console.log(newData);
+        
+            
+            resolve(newData);
+            
+        }).catch((error)=> {
+            console.log(error);
+        });
+    });
+}
 
 // 请求所有的城市数据
 export function getCityList(){
@@ -188,38 +266,3 @@ export function getCityList(){
     });
 }
 
-// 请求本期最受欢迎数据
-export function mostExpected(ci,offset) {
-    return new Promise((resolve, reject) => {
-        http({
-            url: API.MOST_EXPECTED_API,
-            method: 'GET',
-            data: {
-                ci: ci,
-                offset: offset,
-                limit: 10,
-                token: ''
-            }
-        }).then(({data, status})=> {
-
-            if(status != 200){
-                // 请求失败
-                return;
-            }
-            // 处理数据
-            let newData = data.coming.map((item)=>{
-                let {comingTitle, id, img, nm, wish, wishst} = item;
-                // 更改img
-                img = img.replace('w.h', '170.230');
-                return {comingTitle, id, img, nm, wish, wishst};
-            });
-            // console.log(newData);
-        
-            
-            resolve(newData);
-            
-        }).catch((error)=> {
-            console.log(error);
-        });
-    });
-}
