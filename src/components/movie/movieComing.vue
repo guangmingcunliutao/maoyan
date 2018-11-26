@@ -34,6 +34,7 @@
                 </div>
             </div>
         </div>
+        <router-view></router-view>
 
     </app-content>
 </template>
@@ -62,6 +63,7 @@ export default {
         }
     },
     methods: {
+
         initData() {
             
                 // 初始化获取即将上映电影的数据

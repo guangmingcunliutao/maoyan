@@ -266,3 +266,23 @@ export function getCityList(){
     });
 }
 
+export function getDetailMovie (movieId){
+    return new Promise((resolve, reject)=>{
+        http({
+            url: API.DETAIL_MOVIE_API,
+            method: 'GET',
+            data: {
+                movieId
+            }
+        }).then(({data, status})=>{
+            if(status !== 200){
+                return ;
+            }
+            let newData = data.detailMovie;
+            resolve(newData);
+        }).catch((error)=>{
+            console.log(error);
+            reject();
+        });
+    });
+}

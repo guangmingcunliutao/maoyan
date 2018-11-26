@@ -8,6 +8,7 @@ import movie from '../pages/movie/movie'
 // import cinema from '../pages/cinema/cinema'
 import mine from '../pages/mine/mine'
 import cityPage from '../pages/city/cityPage'
+import buyMovie from '../pages/buyMovie/buyMovie'
 
 export default new Router({
     mode: 'history',
@@ -15,13 +16,21 @@ export default new Router({
     routes: [
         {
             path: '/movie',
-            component: movie
+            component: movie,
+        },
+        {
+            path: '/buyMovie/:id',
+            component: buyMovie
         },
         {
             path: '/cinema',
             // component: cinema,
             // 组件懒加载
             component: ()=>import ('../pages/cinema/cinema')
+        },
+        {
+            path: '/search',
+            component: ()=>import ('../pages/search/search')
         },
         {
             path: '/mine',

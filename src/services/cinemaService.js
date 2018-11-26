@@ -44,3 +44,28 @@ export function getCinemaDataList(ci) {
         });
     });
 }
+
+
+// 搜索请求
+export function getSearchData(value, ci) {
+    return new Promise((resolve, reject)=>{
+        http({
+            url: api.SEARCH_API,
+            method: 'GET',
+            data: {
+                kw: value,
+                cityId: ci,
+                stype: 2
+            }
+        }).then(({data, status})=>{
+            if(status != 200){
+                return;
+            }
+            console.log(data.cinemas);
+            resolve(data.cinemas);
+        }).catch((error)=>{
+            console.log(error);
+            reject();
+        });
+    });
+}

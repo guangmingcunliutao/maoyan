@@ -79,6 +79,25 @@ cityId：城市id
 */
 const CINEMA_API = '/ajax/cinemaList'
 
+/* 
+
+搜索接口
+kw: c
+cityId: 55
+stype: 2
+
+*/
+const SEARCH_API = '/ajax/search'
+
+/* 
+
+电影详细信息
+movieId
+
+*/
+const DETAIL_MOVIE_API = '/ajax/detailmovie'
+
+
 // 向外输出
 export default {
     PRO_HOST,
@@ -88,6 +107,8 @@ export default {
     CITY_LIST_API,
     CINEMA_API,
     MOST_EXPECTED_API,
+    SEARCH_API,
     MORE_COMING_API,
-    MORE_PLAYING_API
+    MORE_PLAYING_API,
+    DETAIL_MOVIE_API
 }

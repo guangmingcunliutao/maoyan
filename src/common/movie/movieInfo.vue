@@ -56,7 +56,8 @@ export default {
     methods: {
         // 将要实现的点击事件
         seeDetail(){
-            console.log(1);
+            // console.log(this.movieInfo);
+            this.$router.push({path: '/buyMovie/' + this.movieInfo.id});
         }
     }
 }
@@ -123,6 +124,7 @@ export default {
             width: .94rem;
             height: .54rem;
             font-size: .24rem;
+            margin-left: .3rem;
             span{
                 display: block;
                 width: .94rem;

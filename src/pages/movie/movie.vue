@@ -63,7 +63,6 @@ export default {
     border-bottom: 1px solid #ccc;
     display: flex;
     justify-content: space-between;
-    align-items: center;
     font-size: .30rem;
     box-sizing: border-box;
     .nav {

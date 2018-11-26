@@ -19,10 +19,14 @@ export default {
 <style lang="scss" scoped>
 .city {
     width: 1.8rem;
-    height: .4rem;
+    height: .88rem;
     box-sizing: border-box;
     padding-left: .2rem;
     .city-name{
+        display: block;
+        height: .88rem;
+        font-size: .28rem;
+        line-height: .88rem;
         &::after{
             content: '';
             display: inline-block;
