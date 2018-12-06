@@ -24,7 +24,7 @@ export function getPlayingList(){
                 return ;
             }else {
                 // 对数据进行处理，然后传值
-                // console.log(data);
+                console.log(data);
                 let newData = data.movieList.map((item)=>{
                     // 遍历数据，对数据进行解构处理
                     let {id, nm, img, version, sc, star, showInfo, wish, globalReleased, showst} = item;

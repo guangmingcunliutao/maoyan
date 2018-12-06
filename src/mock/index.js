@@ -12,4 +12,16 @@ let data = Mock.mock({
     name: Random.cname()
 });
 
-console.log(data);
+let movieData = Mock.mock({
+    'coming': [],
+    'movieIds|50-100': [],
+    'movieLisy|10-12': [
+        {
+            'id|1-100': 1,
+            'haspromotionTag|1': true,
+            'img': Random.image('80x190')
+        }
+    ]
+});
+
+console.log(movieData);
