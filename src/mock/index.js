@@ -24,4 +24,4 @@ let movieData = Mock.mock({
     ]
 });
 
-console.log(movieData);
+// console.log(movieData);
