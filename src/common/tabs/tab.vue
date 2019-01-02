@@ -8,6 +8,8 @@
 <script>
 export default {
     name: 'tab',
+    // 子组件访问父组件方法
+    inject: ['handleTabAction'],
     // 获取到传递过来的值
     props: {
         name: String
@@ -20,6 +22,8 @@ export default {
     methods: {
         // 点击触发事件
         tabAction() {
+            // 子组件访问父组件方法
+            // this.handleTabAction(this.name);
             // 在这里可以获取到父级元素的vue组件对象，所以在这里可以访问到父级元素组件里面的事件以及属性
             // console.log(this.$parent);
             this.$parent.handleTabAction(this.name);
