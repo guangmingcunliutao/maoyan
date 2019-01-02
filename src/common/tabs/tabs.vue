@@ -7,6 +7,12 @@
 <script>
 export default {
     name: 'tabs',
+    // 父级组件提供方法给子级组件使用
+    provide() {
+        return {
+            handleTabAction: this.handleTabAction
+        }
+    },
     props: {
         value: Number
     },
